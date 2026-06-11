@@ -1,0 +1,14 @@
+{
+  "name": "meta-devops-functional-tests",
+  "version": "1.0.0",
+  "description": "Selenium functional tests for MeTA DevOps final project",
+  "scripts": {
+    "selenium:test": "node functional-tests/selenium-test.js"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.27.0"
+  },
+  "devDependencies": {
+    "chromedriver": "^149.0.2"
+  }
+}

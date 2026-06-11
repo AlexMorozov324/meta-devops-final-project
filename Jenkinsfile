@@ -74,21 +74,22 @@ pipeline {
 
         stage('6. Selenium Functional Tests') {
             steps {
-                echo 'Running Selenium functional tests'
+                echo 'Running Selenium WebDriver functional tests'
+
                 bat """
                 set "PATH=C:\\Program Files\\Google\\Chrome\\Application;C:\\nvm4w\\nodejs;%PATH%"
+                set "APP_URL=%APP_URL%/"
 
-                echo Checking Node and Selenium installation...
+                echo Checking Node, npm and Chrome...
                 where node
                 where npm
-                where selenium-side-runner
-                where chromedriver
                 where chrome.exe
 
-                call selenium-side-runner.cmd ^
-                  --base-url "%APP_URL%" ^
-                  -c "browserName=chrome goog:chromeOptions.args=[--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--remote-allow-origins=*]" ^
-                  selenium\\meta-app.side
+                echo Installing Node dependencies...
+                npm install
+
+                echo Running Selenium WebDriver tests...
+                npm run selenium:test
                 """
             }
         }
