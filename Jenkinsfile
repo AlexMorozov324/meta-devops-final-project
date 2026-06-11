@@ -86,7 +86,7 @@ pipeline {
 
                 call selenium-side-runner.cmd ^
                   --base-url "%APP_URL%" ^
-                  -c "browserName=chrome" ^
+                  -c "browserName=chrome goog:chromeOptions.args=[--headless=new,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--remote-allow-origins=*]" ^
                   selenium\\meta-app.side
                 """
             }
