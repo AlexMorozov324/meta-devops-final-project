@@ -258,7 +258,7 @@
     <div class="logo">Me<span>TA</span></div>
     <nav>
         <!-- REPLACE: update href to your actual GitHub repository URL -->
-        <a href="https://github.com/YOUR_GITHUB_USERNAME/meta-devops-final-project"
+        <a href="https://github.com/AlexMorozov324/meta-devops-final-project"
            target="_blank" rel="noopener" id="github-link">GitHub</a>
         <a href="https://jenkins.io" target="_blank" rel="noopener" id="jenkins-link">Jenkins</a>
         <a href="https://gatling.io"  target="_blank" rel="noopener" id="gatling-link">Gatling</a>
