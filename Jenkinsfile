@@ -76,13 +76,14 @@ pipeline {
             steps {
                 echo 'Running Selenium functional tests'
                 bat """
-                set PATH=C:\\nvm4w\\nodejs;%PATH%
+                set PATH=C:\Program Files\Google\Chrome\Application;C:\nvm4w\nodejs;%PATH%
 
                 echo Checking Node and Selenium installation...
                 where node
                 where npm
                 where selenium-side-runner
                 where chromedriver
+                chrome.exe --version
 
                 call selenium-side-runner.cmd ^
                   --base-url "%APP_URL%" ^
