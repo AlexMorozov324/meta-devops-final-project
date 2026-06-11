@@ -46,7 +46,7 @@ pipeline {
 
                 bat """
                 echo Waiting for Tomcat to auto-deploy the WAR file...
-                timeout /t 20 /nobreak
+                powershell -Command "Start-Sleep -Seconds 30"
                 dir "%TOMCAT_WEBAPPS%"
                 """
             }
@@ -55,7 +55,20 @@ pipeline {
         stage('5. Availability Check') {
             steps {
                 echo 'Checking if application is available'
-                bat "curl.exe -f \"%APP_URL%/\""
+                bat """
+                echo Checking application URL: %APP_URL%/
+
+                curl.exe -f "%APP_URL%/"
+
+                if errorlevel 1 (
+                     echo Application is still not available.
+                     echo Showing Tomcat webapps folder:
+                     dir "%TOMCAT_WEBAPPS%"
+                     exit /b 1
+                )
+
+                echo Application is available.
+                """
             }
         }
 
