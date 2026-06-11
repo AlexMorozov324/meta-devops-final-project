@@ -86,10 +86,10 @@ pipeline {
                 where chrome.exe
 
                 echo Installing Node dependencies...
-                npm install
+                call npm.cmd install
 
                 echo Running Selenium WebDriver tests...
-                npm run selenium:test
+                call npm.cmd run selenium:test
                 """
             }
         }
