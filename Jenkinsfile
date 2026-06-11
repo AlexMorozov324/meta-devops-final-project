@@ -40,19 +40,14 @@ pipeline {
             }
         }
 
-        stage('4. Restart Tomcat') {
+        stage('4. Wait for Tomcat Auto-Deploy') {
             steps {
-                echo 'Restarting Tomcat'
+                echo 'Tomcat is already running. Waiting for WAR auto-deployment.'
 
                 bat """
-                set CATALINA_HOME=%TOMCAT_HOME%
-                set CATALINA_BASE=%TOMCAT_HOME%
-
-                call "%TOMCAT_HOME%\\bin\\shutdown.bat"
-                timeout /t 8 /nobreak
-
-                call "%TOMCAT_HOME%\\bin\\startup.bat"
+                echo Waiting for Tomcat to auto-deploy the WAR file...
                 timeout /t 20 /nobreak
+                dir "%TOMCAT_WEBAPPS%"
                 """
             }
         }
