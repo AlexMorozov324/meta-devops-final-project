@@ -84,11 +84,10 @@ pipeline {
                 where selenium-side-runner
                 where chromedriver
                 where chrome.exe
-                chrome.exe --version
 
                 call selenium-side-runner.cmd ^
                   --base-url "%APP_URL%" ^
-                  -c "browserName=chrome goog:chromeOptions.args=[--headless=new,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--remote-allow-origins=*]" ^
+                  -c "browserName=chrome goog:chromeOptions.args=[--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--remote-allow-origins=*]" ^
                   selenium\\meta-app.side
                 """
             }
