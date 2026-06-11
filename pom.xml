@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>meta.devops</groupId>
+    <artifactId>meta-devops-final-project</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>MeTA DevOps Final Project - Alexander Morozov, Roei Shalom, Yaron Miroluz</name>
+    <description>DevOps Final Project: JSP Web App with Jenkins CI/CD, Selenium tests, and Gatling performance tests</description>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <gatling.version>3.9.5</gatling.version>
+        <gatling.plugin.version>4.6.0</gatling.plugin.version>
+        <!-- Default app URL — overridden via -Dapp.base.url when running Gatling from Jenkins -->
+        <app.base.url>http://localhost:8080/AlexanderMorozov_RoeiShalom_YaronMiroluz_DevOpsProject</app.base.url>
+    </properties>
+
+    <dependencies>
+
+        <!-- Servlet API: provided by Tomcat at runtime, NOT bundled inside the WAR -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSP API: provided by Tomcat at runtime, NOT bundled inside the WAR -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Gatling with Highcharts reports — used only for performance testing (test scope) -->
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${gatling.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <!-- The final WAR file will be: target/AlexanderMorozov_RoeiShalom_YaronMiroluz_DevOpsProject.war -->
+        <finalName>AlexanderMorozov_RoeiShalom_YaronMiroluz_DevOpsProject</finalName>
+
+        <plugins>
+
+            <!-- Maven WAR Plugin: packages the project as a deployable WAR file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <!-- Allow building without a web.xml (optional; we have one anyway) -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Compiler Plugin: compiles Java source code to bytecode -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+            <!-- Gatling Maven Plugin: executes Gatling performance simulations -->
+            <!-- Usage: mvn gatling:test -Dgatling.simulationClass=meta.performance.LoadSimulation -->
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>${gatling.plugin.version}</version>
+                <configuration>
+                    <!-- Where Gatling looks for Java simulation files -->
+                    <simulationsFolder>src/test/java</simulationsFolder>
+                    <!-- Where Gatling saves HTML reports after each run -->
+                    <resultsFolder>target/gatling</resultsFolder>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

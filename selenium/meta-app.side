@@ -1,0 +1,229 @@
+{
+  "id": "a1b2c3d4-1234-5678-abcd-ef0123456789",
+  "version": "2.0",
+  "name": "MeTA DevOps App - Functional Tests — Alexander Morozov • Roei Shalom • Yaron Miroluz",
+  "url": "http://localhost:8080/DevOpsProject",
+  "tests": [
+
+    {
+      "id": "test-001-page-loads",
+      "name": "Test 01 - Page Loads Successfully (HTTP 200)",
+      "commands": [
+        {
+          "id": "cmd-001-01",
+          "comment": "Navigate to the application home page",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "cmd-001-02",
+          "comment": "Verify the browser page title is correct — proves the page loaded",
+          "command": "assertTitle",
+          "target": "MeTA DevOps Final Project",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+
+    {
+      "id": "test-002-main-title",
+      "name": "Test 02 - Main Title Exists on Page",
+      "commands": [
+        {
+          "id": "cmd-002-01",
+          "comment": "Navigate to the application home page",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "cmd-002-02",
+          "comment": "Verify the H1 main title element is present in the DOM",
+          "command": "assertElementPresent",
+          "target": "id=main-title",
+          "targets": [
+            ["id=main-title", "id"],
+            ["css=#main-title", "css:finder"],
+            ["xpath=//h1[@id='main-title']", "xpath:attributes"]
+          ],
+          "value": ""
+        },
+        {
+          "id": "cmd-002-03",
+          "comment": "Verify the main title text contains 'MeTA DevOps'",
+          "command": "assertText",
+          "target": "id=main-title",
+          "targets": [
+            ["id=main-title", "id"],
+            ["css=#main-title", "css:finder"]
+          ],
+          "value": "glob:*MeTA DevOps*"
+        }
+      ]
+    },
+
+    {
+      "id": "test-003-link-exists",
+      "name": "Test 03 - External Link Exists on Page",
+      "commands": [
+        {
+          "id": "cmd-003-01",
+          "comment": "Navigate to the application home page",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "cmd-003-02",
+          "comment": "Verify the Jenkins nav link is present",
+          "command": "assertElementPresent",
+          "target": "id=jenkins-link",
+          "targets": [
+            ["id=jenkins-link", "id"],
+            ["css=#jenkins-link", "css:finder"],
+            ["xpath=//a[@id='jenkins-link']", "xpath:attributes"]
+          ],
+          "value": ""
+        },
+        {
+          "id": "cmd-003-03",
+          "comment": "Verify the Maven external link is also present",
+          "command": "assertElementPresent",
+          "target": "id=maven-link",
+          "targets": [
+            ["id=maven-link", "id"],
+            ["css=#maven-link", "css:finder"]
+          ],
+          "value": ""
+        }
+      ]
+    },
+
+    {
+      "id": "test-004-input-exists",
+      "name": "Test 04 - Name Input Box Exists",
+      "commands": [
+        {
+          "id": "cmd-004-01",
+          "comment": "Navigate to the application home page",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "cmd-004-02",
+          "comment": "Verify the name text input is present in the form",
+          "command": "assertElementPresent",
+          "target": "id=nameInput",
+          "targets": [
+            ["id=nameInput", "id"],
+            ["css=#nameInput", "css:finder"],
+            ["xpath=//input[@id='nameInput']", "xpath:attributes"]
+          ],
+          "value": ""
+        },
+        {
+          "id": "cmd-004-03",
+          "comment": "Verify the submit button is present",
+          "command": "assertElementPresent",
+          "target": "id=submitBtn",
+          "targets": [
+            ["id=submitBtn", "id"],
+            ["css=#submitBtn", "css:finder"],
+            ["xpath=//button[@id='submitBtn']", "xpath:attributes"]
+          ],
+          "value": ""
+        }
+      ]
+    },
+
+    {
+      "id": "test-005-greeting-result",
+      "name": "Test 05 - Submit Name and Verify Greeting Appears",
+      "commands": [
+        {
+          "id": "cmd-005-01",
+          "comment": "Navigate to the application home page (clean state, no name param)",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "cmd-005-02",
+          "comment": "Clear the input field and type a test name",
+          "command": "type",
+          "target": "id=nameInput",
+          "targets": [
+            ["id=nameInput", "id"],
+            ["css=#nameInput", "css:finder"]
+          ],
+          "value": "Alex"
+        },
+        {
+          "id": "cmd-005-03",
+          "comment": "Click the submit button — this submits the form via GET (?name=Alex)",
+          "command": "click",
+          "target": "id=submitBtn",
+          "targets": [
+            ["id=submitBtn", "id"],
+            ["css=#submitBtn", "css:finder"]
+          ],
+          "value": ""
+        },
+        {
+          "id": "cmd-005-04",
+          "comment": "Wait for the greeting result element to appear after page reload",
+          "command": "waitForElementVisible",
+          "target": "id=greetingResult",
+          "targets": [
+            ["id=greetingResult", "id"],
+            ["css=#greetingResult", "css:finder"]
+          ],
+          "value": "5000"
+        },
+        {
+          "id": "cmd-005-05",
+          "comment": "Verify the greeting contains 'Hello, Alex' — this is the core functional test",
+          "command": "assertText",
+          "target": "id=greetingResult",
+          "targets": [
+            ["id=greetingResult", "id"],
+            ["css=#greetingResult", "css:finder"]
+          ],
+          "value": "glob:*Hello, Alex*"
+        }
+      ]
+    }
+
+  ],
+
+  "suites": [
+    {
+      "id": "suite-001-all-tests",
+      "name": "Full Functional Test Suite",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "test-001-page-loads",
+        "test-002-main-title",
+        "test-003-link-exists",
+        "test-004-input-exists",
+        "test-005-greeting-result"
+      ]
+    }
+  ],
+
+  "urls": [
+    "http://localhost:8080/AlexanderMorozov_RoeiShalom_YaronMiroluz_DevOpsProject"
+  ],
+
+  "plugins": []
+}

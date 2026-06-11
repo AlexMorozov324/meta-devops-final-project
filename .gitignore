@@ -1,0 +1,32 @@
+# ── Maven build output ──────────────────────────────────────────────
+target/
+*.war
+*.jar
+*.class
+
+# ── Gatling reports (generated per run, not checked in) ─────────────
+target/gatling/
+
+# ── IDE project files ────────────────────────────────────────────────
+.idea/
+*.iml
+*.ipr
+*.iws
+.eclipse/
+.classpath
+.project
+.settings/
+*.swp
+*.swo
+
+# ── OS-generated files ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Jenkins workspace artifacts ──────────────────────────────────────
+.jenkins/
+
+# ── Logs ─────────────────────────────────────────────────────────────
+*.log
+logs/
